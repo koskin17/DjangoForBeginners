@@ -5,3 +5,6 @@ def index(request):
     # В фукнцию render обязательно передаётся первый параметр - request и второй параметр - template name или путь к шаблону,
     # который нужно отрендерить / отобразить
     return render(request, 'products/index.html')
+
+def products(request):
+    return render(request, 'products/products.html')

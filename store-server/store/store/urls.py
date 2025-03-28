@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from products.views import index, products    # Импорт функции index из файла products/views.py
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', admin.site.urls),    
+    path('', index, name = 'index'),   # Путь к главной странице сайта. Из-за пустого первого параметра ('') при переходе на наш сайт / проект будет открываться наша главная старница, которую мы описали как index и которая вызывается функцией index из файла products/views.py
+    path('products/', products, name = 'products'),  # Путь к странице с товарами. В этом случае мы хотим, чтобы наша страница products открывалась по url-адресу со словом "products/" и из-за этого мы это указываем в качестве первого параметра в ''. При переходе на наш сайт / проект будет открываться страница с товарами, которую мы описали как products и которая вызывается функцией products из файла products/views.py
 ]
