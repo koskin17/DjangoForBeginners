@@ -1,3 +1,6 @@
+# Исключить папку пользователя Windows
+C:/Users/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
