@@ -1,59 +1,21 @@
+{% extends "products/base.html" %}
+{% comment %} Наследуемся от BASE.html при помощи шаблонного тега {% endcomment %}
+
+{% comment %} Важно помнить, что статика (static) подгружаестся и на всех страницах, которые наследуются от основного шаблона {% endcomment %}
+{% comment %} При помощи шаблонного тега указываем путь к папке static {% endcomment %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+{% block title %}
+{% endblock %}
 
-    <title>Store - Каталог</title>
+{% comment %} Теперь обращаемся к блокам, которые общие для всех страниц и прописаны в шаблоне, от которого наследуемся {% endcomment %}
+{% comment %} На этой странице ставляется CSS-файл для страницы index {% endcomment %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/products.css' %}">
+{% endblock %}
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static  'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/products.css' %}" rel="stylesheet" />
-  </head>
-
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">Store</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'products' %}">Каталог</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"
-                ><i class="fas fa-shopping-bag"></i
-              ></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="auth/login.html"
-                >Войти <i class="fas fa-sign-in-alt"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Page Content -->
+{% block content %}
+<!-- Page Content -->
     <div class="container">
       <div class="row">
         <div class="col-lg-3">
@@ -323,24 +285,14 @@
         </div>
       </div>
     </div>
-    <!-- /.container -->
+{% endblock %}
 
-    <!-- Footer -->
+{% block footer %}
+<!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Store 2021</p>
       </div>
       <!-- /.container -->
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    <!-- FontAwesome script -->
-    <script
-      src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+{% endblock%}

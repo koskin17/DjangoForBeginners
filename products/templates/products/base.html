@@ -1,45 +1,5 @@
-{% extends 'products/base.html' %}
-{% comment %} Наследуемся от BASE.html при помощи шаблонного тега {% endcomment %}
-
-{% comment %} Важно помнить, что статика (static) подгружаестся и на всех страницах, которые наследуются от основного шаблона {% endcomment %}
 {% comment %} При помощи шаблонного тега указываем путь к папке static {% endcomment %}
 {% load static %}
-
-{% block title %}
-{% endblock %}
-
-{% comment %} Теперь обращаемся к блокам, которые общие для всех страниц и прописаны в шаблоне, от которого наследуемся {% endcomment %}
-{% comment %} На этой странице ставляется CSS-файл для страницы index {% endcomment %}
-{% block css %}
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
-{% endblock %}
-
-{% comment %} Дальше идёт блок content для конкретной страницы {% endcomment %}
-{% block content %}
-  <!-- Page Content -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h1 class="mt-5">Store</h1>
-          <p>
-            Новые образы и лучшие бренды Store. Бесплатная доставка по всему
-            миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
-          </p>
-          <button id="start-purchase-btn" type="button" class="btn btn-lg">
-            <a id="start-purchase-link" href="{% url 'products' %}">
-              Начать покупки
-            </a>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-{% endblock %}
-
-
-
-
 {% comment %} После этого можно заменить static по всех путях к каким-либо файлам {% endcomment %}
 
 <!DOCTYPE html>
@@ -53,7 +13,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Store</title>
+    <title>{{ title|title }}</title>
 
     <!-- Bootstrap core CSS -->
     <link
@@ -62,7 +22,7 @@
     />
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% block css %} {% endblock %}
 
   </head>
 
@@ -110,7 +70,9 @@
       </div>
     </nav>
 
-    
+{% block content %} {% endblock %}
+
+{% block footer %} {% endblock %}
 
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

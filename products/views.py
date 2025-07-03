@@ -12,10 +12,16 @@ def index(request):
     # У нас в папке product есть папка templates и django понимает, что в этой папке лежат шаблоны.
     # Т.е. когда django нужен шаблон из products она сама найдёт папку templates и в ней найдёт шаблон.
     # Для того, чтобы страница отображалась нужно указать путь к ней в файле urls.py в корневой папке приложения.
-    return render(request, 'products/index.html')
+    context = {
+        'title': "Store"
+    }
+    return render(request, 'products/index.html', context)
 
 def products(request):
-    return render(request, 'products/products.html')
+    context = {
+        'title': "Store - Каталог"
+    }
+    return render(request, 'products/products.html', context)
 
 def test_context(request):
     context = {
