@@ -13,12 +13,14 @@
     <!--И тут использован placeholder -->
     <!--Но placeholder не годится для действий, связанных с итерацией по спискам и вывода значений этого списка-->
     <!--Для итераций используется шаблонный тег-->
-    {% for product in products %}
-      <h4>{{ product.name}}</h4>
-      <!-- Здесь мы уже используем placeholder -->
-      <p>{{ product.price }} долл.США</p>
-      <!-- Шаблонный тег обязательно и всегда закрывается-->
-    {% endfor %}
+    {% if products %}
+      {% for product in products %}
+        <h4>{{ product.name}}</h4>
+        <!-- Здесь мы уже используем placeholder -->
+        <p>{{ product.price }} долл.США</p>
+        <!-- Шаблонный тег обязательно и всегда закрывается-->
+      {% endfor %}
+    {% endif %}
 
     {% if products_of_promotion %}
       <h3 style="color: red;">Товары по акции</h3>

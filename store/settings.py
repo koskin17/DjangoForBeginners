@@ -120,6 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ( #Этот параметр указывает на папку, в которой будут храниться все статические файлы (картинки, стили, скрипты и т.д.)
+
+#Этот параметр указывает на папку, в которой будут храниться все статические файлы (картинки, стили, скрипты и т.д.)
+STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'), #os.path.join(BASE_DIR, 'static') - это путь к папке static в нашем проекте
-)   
+)

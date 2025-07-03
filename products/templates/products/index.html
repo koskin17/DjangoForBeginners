@@ -18,7 +18,9 @@
     />
 
     <!-- Custom styles for this template -->
-    <link href="/static/css/index.css" rel="stylesheet" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
   </head>
 
   <body>
@@ -40,7 +42,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="products.html"
+              <a class="nav-link" href="{% url 'products' %}"
                 >Каталог <i class="fas fa-shopping-bag"></i>
               </a>
             </li>
@@ -76,7 +78,7 @@
               миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
             </p>
             <button id="start-purchase-btn" type="button" class="btn btn-lg">
-              <a id="start-purchase-link" href="products.html">
+              <a id="start-purchase-link" href="{% url 'products' %}">
                 Начать покупки
               </a>
             </button>
