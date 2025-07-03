@@ -1,5 +1,8 @@
 # Local history
 .history
 
-store-template-master.zip
-tree.py
+# Extra files
+**/store-template-master.zip
+**/tree.py
+
+.venv

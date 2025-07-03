@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from products.views import index, products, test_context   # Импорт функции index из файла products/views.py
+from products.views import index, products, test_context   # Импорт функции из файла products/views.py
 
+# В urlpattern первым параметров указывается адрес, по которому будет отображаться страница,  а вторым - сама страница, которая будет отображаться
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = 'index'),   # Путь к главной странице сайта. Из-за пустого первого параметра ('') при переходе на наш сайт / проект будет открываться наша главная старница, которую мы описали как index и которая вызывается функцией index из файла products/views.py
