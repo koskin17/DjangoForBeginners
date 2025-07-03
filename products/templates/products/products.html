@@ -1,31 +1,27 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
 
     <title>Store - Каталог</title>
 
     <!-- Bootstrap core CSS -->
-    <link
-      href="/static/vendor/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="{% static  'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="/static/css/products.css" rel="stylesheet" />
+    <link href="{% static 'css/products.css' %}" rel="stylesheet" />
   </head>
 
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">Store</a>
+        <a class="navbar-brand" href="{% url 'index' %}">Store</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -40,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="products.html">Каталог</a>
+              <a class="nav-link" href="{% url 'products' %}">Каталог</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"
@@ -97,21 +93,21 @@
               <div class="carousel-item active">
                 <img
                   class="d-block img-fluid"
-                  src="/static/vendor/img/slides/slide-1.jpg"
+                  src="{% static 'vendor/img/slides/slide-1.jpg' %}"
                   alt="First slide"
                 />
               </div>
               <div class="carousel-item">
                 <img
                   class="d-block img-fluid"
-                  src="/static/vendor/img/slides/slide-2.jpg"
+                  src="{% static 'vendor/img/slides/slide-2.jpg' %}"
                   alt="Second slide"
                 />
               </div>
               <div class="carousel-item">
                 <img
                   class="d-block img-fluid"
-                  src="/static/vendor/img/slides/slide-3.jpg"
+                  src="{% static 'vendor/img/slides/slide-3.jpg' %}"
                   alt="Third slide"
                 />
               </div>
@@ -148,7 +144,7 @@
                 <a href="#">
                   <img
                     class="card-img-top"
-                    src="/static/vendor/img/products/Adidas-hoodie.png"
+                    src="{% static 'vendor/img/products/Adidas-hoodie.png' %}"
                     alt=""
                   />
                 </a>
@@ -158,7 +154,7 @@
                       >Худи черного цвета с монограммами adidas Originals</a
                     >
                   </h4>
-                  <h5>6 090,00 руб.</h5>
+                  <h5>6 090,00</h5>
                   <p class="card-text">
                     Мягкая ткань для свитшотов. Стиль и комфорт – это образ
                     жизни.
@@ -177,7 +173,7 @@
                 <a href="#">
                   <img
                     class="card-img-top"
-                    src="/static/vendor/img/products/Blue-jacket-The-North-Face.png"
+                    src="{% static 'vendor/img/products/Blue-jacket-The-North-Face.png' %}"
                     alt=""
                   />
                 </a>
@@ -185,7 +181,7 @@
                   <h4 class="card-title">
                     <a href="#">Синяя куртка The North Face</a>
                   </h4>
-                  <h5>23 725,00 руб.</h5>
+                  <h5>23 725,00</h5>
                   <p class="card-text">
                     Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый
                     пуховый наполнитель.
@@ -204,7 +200,7 @@
                 <a href="#">
                   <img
                     class="card-img-top"
-                    src="/static/vendor/img/products/Brown-sports-oversized-top-ASOS-DESIGN.png"
+                    src="{% static 'vendor/img/products/Brown-sports-oversized-top-ASOS-DESIGN.png' %}"
                     alt=""
                   />
                 </a>
@@ -214,7 +210,7 @@
                       >Коричневый спортивный oversized-топ ASOS DESIGN</a
                     >
                   </h4>
-                  <h5>3 390,00 руб.</h5>
+                  <h5>3 390,00</h5>
                   <p class="card-text">
                     Материал с плюшевой текстурой. Удобный и мягкий.
                   </p>
@@ -232,7 +228,7 @@
                 <a href="#">
                   <img
                     class="card-img-top"
-                    src="/static/vendor/img/products/Black-Nike-Heritage-backpack.png"
+                    src="{% static 'vendor/img/products/Black-Nike-Heritage-backpack.png' %}"
                     alt=""
                   />
                 </a>
@@ -240,7 +236,7 @@
                   <h4 class="card-title">
                     <a href="#">Черный рюкзак Nike Heritage</a>
                   </h4>
-                  <h5>2 340,00 руб.</h5>
+                  <h5>2 340,00</h5>
                   <p class="card-text">Плотная ткань. Легкий материал.</p>
                 </div>
                 <div class="card-footer text-center">
@@ -256,7 +252,7 @@
                 <a href="#">
                   <img
                     class="card-img-top"
-                    src="/static/vendor/img/products/Black-Dr-Martens-shoes.png"
+                    src="{% static 'vendor/img/products/Black-Dr-Martens-shoes.png' %}"
                     alt=""
                   />
                 </a>
@@ -267,7 +263,7 @@
                       1461 Bex</a
                     >
                   </h4>
-                  <h5>13 590,00 руб.</h5>
+                  <h5>13 590,00</h5>
                   <p class="card-text">
                     Гладкий кожаный верх. Натуральный материал.
                   </p>
@@ -285,7 +281,7 @@
                 <a href="#">
                   <img
                     class="card-img-top"
-                    src="/static/vendor/img/products/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png"
+                    src="{% static 'vendor/img/products/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png' %}"
                     alt=""
                   />
                 </a>
@@ -295,7 +291,7 @@
                       >Темно-синие широкие строгие брюки ASOS DESIGN</a
                     >
                   </h4>
-                  <h5>2 890,00 руб.</h5>
+                  <h5>2 890,00</h5>
                   <p class="card-text">
                     Легкая эластичная ткань сирсакер Фактурная ткань.
                   </p>
@@ -338,12 +334,12 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- FontAwesome script -->
     <script
-      src="/static/vendor/fontawesome/fontawesome-icons.js"
+      src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}"
       crossorigin="anonymous"
     ></script>
   </body>
