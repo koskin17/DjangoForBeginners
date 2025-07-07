@@ -1,5 +1,6 @@
 # Local history
 .history
+db.sqlite3
 
 # Extra files
 **/store-template-master.zip
