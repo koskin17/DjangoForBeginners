@@ -125,3 +125,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'), #os.path.join(BASE_DIR, 'static') - это путь к папке static в нашем проекте
 )
+
+# Настройки хранения медиафайлов (изображений, видео и т.д.)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

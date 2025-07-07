@@ -5,6 +5,8 @@ Views - это просто функции, которые вызываются.
 
 from django.shortcuts import render
 
+from products.models import ProductCategory, Product
+
 def index(request):
     # В данном случае возвращается результат - функцию render, которая и рендерит (создаёт) определённую страницу.
     # В фукнцию render обязательно передаётся первый параметр - request.
@@ -19,7 +21,9 @@ def index(request):
 
 def products(request):
     context = {
-        'title': "Store - Каталог"
+        'title': "Store - Каталог",
+        'categories': ProductCategory.objects.all(),    # Получаем все категории продуктов из базы данных
+        'products': Product.objects.all(),  # Получаем все продукты из базы данных
     }
     return render(request, 'products/products.html', context)
 

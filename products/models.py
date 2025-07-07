@@ -8,6 +8,12 @@ from django.db import models
 class ProductCategory(models.Model):
     name = models.CharField(max_length=64, unique=True, verbose_name='Наименование категории')    # unique=True означает, что данное поле должно быть уникальным
     description = models.TextField(blank=True, verbose_name='Описание категории')   # Специальный класс для поля с большим кол-вом текста. blant=True позволяет полю быть пустым
+    
+    class Meta:
+        verbose_name_plural = 'Product Categories'
+        
+    def __str__(self):
+        return f"{self.name}"
 
 class Product(models.Model):
     name = models.CharField(max_length=256, unique=True, verbose_name='Наименование товара')
@@ -18,3 +24,6 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество товара')  # PositiveIntegerField - поле для положительных целых чисел
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='products', verbose_name='Категория товара')  # Связь с моделью ProductCategory.  on_delete=models.PROTECT охначает, что при удалении категории будут одновременно удалены и все товары ,которые в неё входят. on_delete=models.PROTECT означает, что категорию нельзя удалить пока хотя бы один товар в ней есть. related_name='products' - позволяет получить все товары в категории через category.products.all()
     is_active = models.BooleanField(default=True, verbose_name='Активность товара')
+    
+    def __str__(self):
+        return f"{self.category.name} | {self.name}"
