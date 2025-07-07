@@ -14,17 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include # Импортируется include для пространства имён
 from django.conf.urls.static import static
 from django.conf import settings
 
-from products.views import index, products, test_context   # Импорт функции из файла products/views.py
+from products.views import index, test_context   # Импорт функции из файла products/views.py
 
 # В urlpattern первым параметров указывается адрес, по которому будет отображаться страница,  а вторым - сама страница, которая будет отображаться
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = 'index'),   # Путь к главной странице сайта. Из-за пустого первого параметра ('') при переходе на наш сайт / проект будет открываться наша главная старница, которую мы описали как index и которая вызывается функцией index из файла products/views.py
-    path('products/', products, name = 'products'),  # Путь к странице с товарами. В этом случае мы хотим, чтобы наша страница products открывалась по url-адресу со словом "products/" и из-за этого мы это указываем в качестве первого параметра в ''. При переходе на наш сайт / проект будет открываться страница с товарами, которую мы описали как products и которая вызывается функцией products из файла products/views.py
+    path('products/', include('products.urls', namespace='products')),  # Путь к странице с товарами. В этом случае мы хотим, чтобы наша страница products открывалась по url-адресу со словом "products/" и из-за этого мы это указываем в качестве первого параметра в ''. При переходе на наш сайт / проект будет открываться страница с товарами, которую мы описали как products и которая вызывается функцией products из файла products/views.py.
+    # Также тут примененно пространство имён и все маршруты с products теперь имеют пространство имён "products" и обрабатываются приложением products
     path('test-context/', test_context, name = 'test_context'),
 ]
 
