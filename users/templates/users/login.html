@@ -10,17 +10,15 @@
             <form acton="{% url 'users:login' %}" method='POST'> {% comment %}Так мы говорим форме, чтобы она отправляла полученные данные в контроллер, который, по сути, и является функцией.
                 Также важно обеспечить безопасность метода POST, т.е. отправляемых данных. Для этого используется токкен CSRF. Подробнее про него: https://docs.djangoproject.com/en/3.1/ref/csrf/{% endcomment %}
                 {% csrf_token %}
-                {{ form.as_p }}
-                {% comment %} <div class="form-group">
-                    <label class="small mb-1" for="inputEmailAddress">Имя пользователя</label>
-                    <input class="form-control py-4" id="inputEmailAddress" type="email"
-                            placeholder="Введите имя пользователя"/>
+                {% comment %} {{ form.as_p }} as_p указывает на то, что отображаться будет как тег <p></p>. Также есть набор других тегов as_ul и т.д. {% endcomment %}
+                <div class="form-group">
+                    <label class="small mb-1" for={{ form.username.id_for_label }}>Имя пользователя</label>
+                   {{ form.username }}
                 </div>
                 <div class="form-group">
-                    <label class="small mb-1" for="inputPassword">Пароль</label>
-                    <input class="form-control py-4" id="inputPassword" type="password"
-                            placeholder="Введите пароль"/>
-                </div> {% endcomment %}
+                    <label class="small mb-1" for={{ form.pasword.id_for_label }}>Пароль</label>
+                    {{ form.password }}
+                </div>
                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                     <a class="small" href="#">Забыли пароль?</a>
                     <input class="btn btn-primary" type="submit" value="Авторизоваться">
