@@ -4,7 +4,7 @@ from users.models import User
 
 class UserLoginForm(AuthenticationForm):
     """
-    Кастомная форма логина, которая наследуюется от Django's AuthenticationForm.
+    Кастомная форма логина, которая наследуется от Django's AuthenticationForm.
     Она может быть расширена дополнительными полями или методами валидации.
     """
     class Meta:
