@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
-from django.contrib import auth
+from django.contrib import auth, messages   # auth - это модуль, который позволяет работать с пользователями, а messages - это модуль, который позволяет выводить кастомные сообщения пользователю
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
@@ -31,6 +31,7 @@ def register(request):
         
         if form.is_valid():
             form.save()
+            messages.success(request, 'Вы успешно зарегистрированы и можете авторизироваться под своим логином и паролем!')  # Выводим сообщение пользователю, что он успешно зарегистрирован
             return HttpResponseRedirect(reverse('users:login'))
         else:
             print(form.errors)
@@ -55,3 +56,7 @@ def profile(request):
         form = UserProfileForm(instance = request.user) # Именно instance = request.user обеспечивает отображение информации пользователя в полях в личном кабинете / в профиле.
     context = {'form': form}
     return render(request, 'users/profile.html', context)
+
+def logout(request):
+    auth.logout(request)
+    return redirect('index')

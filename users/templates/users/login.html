@@ -3,9 +3,18 @@
 {% load static %}
 
 {% block content %}
-    {% if form.errors %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top: 50px;">
-            {{ form.non_field_errors }} {% comment %} в этом случае, при написании non_field_errors, пропадает заголовок ошибки о том, что она относится ко всем полям / ключам в django {% endcomment %}
+    {% if messages or form.errors %}
+        <div class="alert 
+            {% if messages %} alert-success {% else %} alert-warning {% endif %} fade show" role="alert" style="margin-top: 50px;"> {% comment %} Все классы задаются так потому что шаблон из bootstrap  {% endcomment %}
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.non_field_errors }} {% comment %} в этом случае, при написании non_field_errors, пропадает заголовок ошибки о том, что она относится ко всем полям / ключам в django {% endcomment %}
+            {% endif %}
+
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">x</span>
             </button>
