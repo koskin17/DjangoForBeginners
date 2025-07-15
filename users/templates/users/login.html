@@ -3,6 +3,14 @@
 {% load static %}
 
 {% block content %}
+    {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top: 50px;">
+            {{ form.non_field_errors }} {% comment %} в этом случае, при написании non_field_errors, пропадает заголовок ошибки о том, что она относится ко всем полям / ключам в django {% endcomment %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">x</span>
+            </button>
+        </div>
+    {% endif %}
     <div class="card shadow-lg border-0 rounded-lg mt-5">
         <div class="card-header"><h3 class="text-center font-weight-light my-4">Авторизация</h3>
         </div>

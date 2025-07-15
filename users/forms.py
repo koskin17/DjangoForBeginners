@@ -1,5 +1,5 @@
 from django import forms # Этот файл импортируется для кастомизации форм
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm  # UserChangeForm - специальный встроенный в django модуль для редактирования информации 
 
 from users.models import User
 
@@ -42,3 +42,18 @@ class UserRegistrationForm(UserCreationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'   
         
+class UserProfileForm(UserChangeForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'readonly': True}))  # Параметр readonly: True позволяет отображать значение поля, но запретить его изменение (в данном случае блокировка изменения пользователем в своем профиле.)
+    email = forms.CharField(widget=forms.EmailInput(attrs={'readonly': True}))  # Параметр readonly: True позволяет отображать значение поля, но запретить его изменение (в данном случае блокировка изменения пользователям в своем профиле.)
+    image = forms.ImageField(widget=forms.FileInput(), required=False)  # Параметр required=False позволяет не загружать изображение, т.е. делает это поле не обязательным.
+    
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'image')
+        
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'  
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'

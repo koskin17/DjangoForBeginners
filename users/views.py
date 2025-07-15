@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
 from django.contrib import auth
 
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 def login(request):
     if request.method == 'POST': # Проверяем, если метод POST
@@ -41,4 +41,17 @@ def register(request):
     return render(request, 'users/register.html', context)
 
 def profile(request):
-    return render(request, 'users/profile.html')
+    # Это POST запрос, который позволяет менять информацию в БД / в профиле
+    if request.method == 'POST':
+        form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)    # Если метод POST, то в форму передаются сами данные метода POST, а также указывается объект, который меняется - instance=request.user, т.е. указывается пользователь, с которым мы будем иметь дело и данные которого будут меняться. Также отдельно и специально передаётся FILE, без чего файл не поменяется
+        # Дальше идёт проверка на валидность данных
+        if form.is_valid():
+            # Если проверка валидности прошла,то форма сохраняется
+            form.save()
+            # И позвращается редирект, т.е. пользователь перенаправляется на ту страницу, на которой он менял данные, т.е. на профиль.
+            return redirect('users:profile')
+    else:
+        # Это GET запрос, т.е. когда информация получается из БД
+        form = UserProfileForm(instance = request.user) # Именно instance = request.user обеспечивает отображение информации пользователя в полях в личном кабинете / в профиле.
+    context = {'form': form}
+    return render(request, 'users/profile.html', context)
