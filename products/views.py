@@ -20,14 +20,17 @@ def index(request):
     }
     return render(request, 'products/index.html', context)
 
-def products(request):
+def products(request, category_id=None):
     """ Method to display all products in the store """
-    
     context = {
         'title': "Store - Каталог",
         'categories': ProductCategory.objects.all(),    # Получаем все категории продуктов из базы данных
-        'products': Product.objects.all(),  # Получаем все продукты из базы данных
     }
+    
+    if category_id:
+        context.update({'products': Product.objects.filter(category_id=category_id)})  # Получаем / фильтруем товары на странице по категории
+    else:
+        context.update({'products': Product.objects.all()})  # Получаем все товары из всех категория в базе данных
     return render(request, 'products/products.html', context)
 
 @login_required  # Декоратор, который позволяет ограничить доступ к показу страниц только для авторизованных пользователей
