@@ -3,12 +3,12 @@ Views - это так называемые контроллеры, которы�
 Views - это просто функции, которые вызываются.
 """
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from products.models import ProductCategory, Product
+from products.models import ProductCategory, Product, Basket
 
 def index(request):
-    # В данном случае возвращается результат - функцию render, которая и рендерит (создаёт) определённую страницу.
+    # В данном случае возвращается результат - функция render, которая и рендерит (создаёт) определённую страницу.
     # В фукнцию render обязательно передаётся первый параметр - request.
     # Для возвращения срендеринной страницу нужно указать сам запрос, который мы передали, и путь к шаблону той страницы, которую мы возвращаем.
     # У нас в папке product есть папка templates и django понимает, что в этой папке лежат шаблоны.
@@ -26,6 +26,23 @@ def products(request):
         'products': Product.objects.all(),  # Получаем все продукты из базы данных
     }
     return render(request, 'products/products.html', context)
+
+def basket_add(request, product_id):
+    current_page = request.META.get('HTTP_REFERER')
+    product = Product.objects.get(id=product_id)
+    baskets = Basket.objects.filter(user=request.user, product=product)
+    
+    if not baskets.exists():    # Метод exsists применяется только для списков
+        basket = Basket(user=request.user, product=product, quantity=1)
+        basket.save()
+        # Второй способ создать объект корзины, если его ещё нет у пользователя
+        # Basket.objects.create(user=request.user, product=product, quantity=1)
+        return redirect(current_page)   # Возвращаем пользователя на ту же страницу, на которой он находится сейчас
+    else:
+        basket = baskets.first()
+        basket.quantity += 1
+        basket.save()
+        return redirect(current_page)
 
 def test_context(request):
     context = {

@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 # Модели в Django - это обычные классы в Pyton
 # Пустой класс или модель в Django создать нельзя. Он всегда унаследован от models.Model.
 # Поле id или primary_key в Django создаётся автоматически, если не указано иное.
@@ -27,3 +29,13 @@ class Product(models.Model):
     
     def __str__(self):
         return f"{self.category.name} | {self.name}"
+    
+class Basket(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0)
+    created_timestap = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'Корзина для {self.user.username} | Продукт {self.product.name}'
+    
