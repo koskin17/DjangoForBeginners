@@ -5,6 +5,7 @@ Views - это просто функции, которые вызываются.
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required  # Декоратор, который позволяет ограничить доступ к показу страниц только для авторизованных пользователей
+from django.core.paginator import Paginator  # Импортируем Paginator для постраничного отображения товаров
 
 from products.models import ProductCategory, Product, Basket
 
@@ -20,17 +21,24 @@ def index(request):
     }
     return render(request, 'products/index.html', context)
 
-def products(request, category_id=None):
+def products(request, category_id=None, page=1):
     """ Method to display all products in the store """
+    
     context = {
         'title': "Store - Каталог",
         'categories': ProductCategory.objects.all(),    # Получаем все категории продуктов из базы данных
     }
     
     if category_id:
-        context.update({'products': Product.objects.filter(category_id=category_id)})  # Получаем / фильтруем товары на странице по категории
+        products = Product.objects.filter(category_id=category_id)  # Фильтруем товары по категории
+        
     else:
-        context.update({'products': Product.objects.all()})  # Получаем все товары из всех категория в базе данных
+        products = Product.objects.all()  # Получаем все товары из базы данных
+        # context.update({'products': Product.objects.all()})  # Получаем все товары из всех категория в базе данных
+        
+    paginator = Paginator(products, 3)  # Создаём пагинатор, который будет разбивать товары на страницы по 3 товара на странице
+    products_paginator = paginator.page(page)  # Получаем текущую страницу с товарами
+    context.update({'products': products_paginator})  # Получаем / фильтруем товары на странице по категории
     return render(request, 'products/products.html', context)
 
 @login_required  # Декоратор, который позволяет ограничить доступ к показу страниц только для авторизованных пользователей
