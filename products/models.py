@@ -36,6 +36,11 @@ class Basket(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     created_timestap = models.DateTimeField(auto_now_add=True)
     
+    def sum(self):
+        """ Method to calculate the total price of the product in the basket """
+        
+        return self.product.price * self.quantity
+    
     def __str__(self):
         return f'Корзина для {self.user.username} | Продукт {self.product.name}'
     
