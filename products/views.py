@@ -20,6 +20,8 @@ def index(request):
     return render(request, 'products/index.html', context)
 
 def products(request):
+    """ Method to display all products in the store """
+    
     context = {
         'title': "Store - Каталог",
         'categories': ProductCategory.objects.all(),    # Получаем все категории продуктов из базы данных
@@ -28,23 +30,34 @@ def products(request):
     return render(request, 'products/products.html', context)
 
 def basket_add(request, product_id):
+    """ Method to add a product to the basket """
+    
     current_page = request.META.get('HTTP_REFERER')
     product = Product.objects.get(id=product_id)
-    baskets = Basket.objects.filter(user=request.user, product=product)
+    basket = Basket.objects.filter(user=request.user, product=product)
     
-    if not baskets.exists():    # Метод exsists применяется только для списков
+    if not basket.exists():    # Метод exsists применяется только для списков
         basket = Basket(user=request.user, product=product, quantity=1)
         basket.save()
         # Второй способ создать объект корзины, если его ещё нет у пользователя
         # Basket.objects.create(user=request.user, product=product, quantity=1)
         return redirect(current_page)   # Возвращаем пользователя на ту же страницу, на которой он находится сейчас
     else:
-        basket = baskets.first()
+        basket = basket.first()
         basket.quantity += 1
         basket.save()
         return redirect(current_page)
 
+def basket_delete(request, id):
+    """ Method to delete a product from the basket"""
+    
+    basket = Basket.objects.get(id=id)
+    basket.delete()
+    return redirect(request.META.get('HTTP_REFERER'))
+
 def test_context(request):
+    """ Method to test context data in a template """
+    
     context = {
         'title': 'store',
         'header': 'Welcome to our store!',

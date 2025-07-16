@@ -6,6 +6,8 @@ from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from products.models import Basket
 
 def login(request):
+    """ Method to log in a user """
+    
     if request.method == 'POST': # Проверяем, если метод POST
         form = UserLoginForm(data=request.POST) # То в переменную form собираем данные из пришедшего запроса
         
@@ -27,6 +29,8 @@ def login(request):
     return render(request, 'users/login.html', context)
 
 def register(request):
+    """ Method to register a new user """
+    
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
         
@@ -43,6 +47,8 @@ def register(request):
     return render(request, 'users/register.html', context)
 
 def profile(request):
+    """ Method to display user profile and allow editing """
+    
     active_user = request.user # Получение пользователя из информации в запросе, чтобы дальше по коду не повторять эту строку.
     # Это POST запрос, который позволяет менять информацию в БД / в профиле
     if request.method == 'POST':
@@ -63,5 +69,6 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 def logout(request):
+    """ Method to log out a user """ 
     auth.logout(request)
     return redirect(request, 'index')
