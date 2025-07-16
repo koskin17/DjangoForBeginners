@@ -4,6 +4,7 @@ Views - это просто функции, которые вызываются.
 """
 
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required  # Декоратор, который позволяет ограничить доступ к показу страниц только для авторизованных пользователей
 
 from products.models import ProductCategory, Product, Basket
 
@@ -29,6 +30,7 @@ def products(request):
     }
     return render(request, 'products/products.html', context)
 
+@login_required  # Декоратор, который позволяет ограничить доступ к показу страниц только для авторизованных пользователей
 def basket_add(request, product_id):
     """ Method to add a product to the basket """
     

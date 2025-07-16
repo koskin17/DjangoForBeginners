@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
 from django.contrib import auth, messages   # auth - это модуль, который позволяет работать с пользователями, а messages - это модуль, который позволяет выводить кастомные сообщения пользователю
+from django.contrib.auth.decorators import login_required  # Декоратор, который позволяет ограничить доступ к показу страниц только для авторизованных пользователей
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from products.models import Basket
@@ -46,6 +47,9 @@ def register(request):
     context = {'form': form}
     return render(request, 'users/register.html', context)
 
+@login_required  # Декоратор, который позволяет ограничить доступ к показу страниц только для авторизованных пользователей
+# Дополнительно в setting.py указывается значение LOGIN_URL, чтобы при попытке зайти на страницу, которая требует авторизации, пользователь был перенаправлен на страницу авторизации
+# Если пользователь не авторизован, то он будет перенаправлен на страницу авторизации
 def profile(request):
     """ Method to display user profile and allow editing """
     
